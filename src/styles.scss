@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@use 'tailwindcss';
+@import 'primeicons/primeicons.css';
+
+.html,
+body {
+  font-family: 'Inter', sans-serif !important;
+  font-optical-sizing: auto;
+  font-feature-settings: 'liga', 'kern';
+  font-variation-settings: 'slnt' 0;
+  background-color: var(--grid-bg) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
