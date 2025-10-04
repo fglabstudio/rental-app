@@ -1,6 +1,6 @@
 {
-  "name": "rental-app",
-  "short_name": "rental-app",
+  "name": "Pandora App",
+  "short_name": "Pandora App",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
