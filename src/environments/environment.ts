@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  supabase_url: 'https://iiaowuevoznophsmlubp.supabase.co',
+  api_url: 'https://customer-blacklist-rental-default-rtdb.asia-southeast1.firebasedatabase.app',
 };
 
 /*

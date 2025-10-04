@@ -1,0 +1,10 @@
+<div
+    class="flex w-full items-center gap-2 p-2 bg-gray-100 h-[4rem] shadow-sm border-b border-t-0 border-x-0 border-solid border-gray-200">
+    @if (Title != 'Home') {
+    <p-button severity="secondary" icon="pi pi-chevron-left" (onClick)="onBackToHome()"></p-button>
+    }
+
+    <p class="text-gray-700 text-lg font-medium mx-auto {{ Title != 'Home' ? 'pr-7' : '' }}">
+        {{ Title }}
+    </p>
+</div>

@@ -12,3 +12,200 @@ body {
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
+
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.p-inputtext-sm .p-inputtext {
+  width: 100% !important;
+  font-size: 14px !important;
+}
+
+.p-inputtext-sm.text-end .p-inputtext {
+  width: 100% !important;
+  font-size: 14px !important;
+  text-align: right !important;
+}
+
+.p-inputtext-sm .p-inputnumber {
+  width: 100% !important;
+}
+
+p-inputnumber,
+.p-inputnumber {
+  width: 100% !important;
+}
+
+.p-dropdown {
+  width: 100% !important;
+}
+
+.p-dropdown-item {
+  font-size: 14px !important;
+}
+
+.p-dropdown-filter {
+  padding: 10px !important;
+  font-size: 14px !important;
+}
+
+.spinner {
+  height: 2rem !important;
+  width: 2rem !important;
+}
+
+#spinnerLoading .p-dialog-content {
+  padding: 10px 35px !important;
+  border-radius: 10px !important;
+}
+
+#lookupDialog .p-dialog-header {
+  padding: 10px !important;
+}
+
+#lookupDialog .p-dialog-content {
+  border-top: 1px solid #f3f4f6 !important;
+  padding: 10px 25px 20px 25px !important;
+}
+
+#formDialog .p-dialog-header,
+#formDialog .p-dialog-content,
+#formDialog .p-dialog-footer {
+  padding: 10px 20px !important;
+}
+
+.p-menubar {
+  background-color: white !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.p-menuitem-icon,
+.p-menuitem-text,
+.p-submenu-icon {
+  font-size: 14px !important;
+}
+
+.p-menubar-start {
+  margin-right: auto !important;
+}
+
+.p-datepicker table td {
+  padding: 0.5rem !important;
+}
+
+.p-datepicker table td>span {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.p-tabview-panels {
+  padding: 10px 0px !important;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: #60a5fa !important;
+  color: #60a5fa !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: none !important;
+}
+
+.p-tabview-title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.p-multiselect-label {
+  padding: 10px !important;
+  font-size: 14px !important;
+}
+
+.p-inputtextarea {
+  font-size: 14px !important;
+}
+
+.p-submenu-list {
+  width: 100% !important;
+}
+
+.p-menu {
+  top: 45px !important;
+  left: 1180px !important;
+  width: 120px !important;
+}
+
+.ag-theme-alpine.no_toolbar .ag-root-wrapper {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 5px !important;
+  z-index: 0 !important;
+}
+
+.ag-theme-alpine.with_toolbar .ag-root-wrapper {
+  border-right: 1px solid #e2e8f0 !important;
+  border-left: 1px solid #e2e8f0 !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-bottom-right-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+  z-index: 0 !important;
+}
+
+.ag-header-cell-label {
+  justify-content: center !important;
+}
+
+input,
+textarea {
+  font-size: 14px !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.readonlyState {
+  background-color: rgb(229 231 235) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
+p-sorticon>sortalticon>svg.p-sortable-column-icon {
+  width: 11px !important;
+  height: 11px !important;
+}
+
+p-password {
+  padding: 0 !important;
+}

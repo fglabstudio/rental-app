@@ -1,0 +1,154 @@
+<div class="flex flex-col items-center justify-center w-full h-[100vh] p-8 overflow-hidden bg-gray-50">
+    <!-- Header -->
+    @if (_showRegister) {
+    <div class="flex flex-col w-full gap-2 items-center justify-center">
+        <p class="text-3xl font-semibold text-emerald-500">
+            Register
+        </p>
+        <p class="text-sm text-gray-500 text-center">
+            Buat akun baru dengan memasukkan email dan password Anda
+        </p>
+    </div>
+    } @else {
+    <div class="flex flex-col w-full gap-2 items-center justify-center">
+        <p class="text-3xl font-semibold text-emerald-500">
+            Log In
+        </p>
+        <p class="text-sm text-gray-500 text-center">
+            Mohon masukkan email dan password Anda untuk menggunakan app
+        </p>
+    </div>
+    }
+
+    <!-- Form -->
+    <div class="flex flex-col w-full mt-12 mb-2" [formGroup]="Form">
+        <!-- Nama Lengkap -->
+        <div class="{{ _showRegister ? 'flex' : 'hidden' }} flex-col w-full gap-1 mb-4">
+            <p class="text-emerald-600 font-medium text-sm">
+                Nama Lengkap
+            </p>
+
+            <input type="text" pInputText class="p-inputtext-sm w-full" placeholder="Masukkan nama lengkap Anda"
+                formControlName="full_name">
+
+            @if (Form.get('full_name')?.touched && Form.get('full_name')?.invalid) {
+            <span class="mt-0 rounded-md bg-red-200 text-red-600 font-semibold w-full text-xs p-2">
+                Nama Lengkap Tidak Boleh Kosong
+            </span>
+            }
+        </div>
+
+        <!-- Nama Lengkap -->
+        <div class="{{ _showRegister ? 'flex' : 'hidden' }} flex-col w-full gap-1 mb-4">
+            <p class="text-emerald-600 font-medium text-sm">
+                Nama Instansi
+            </p>
+
+            <input type="text" pInputText class="p-inputtext-sm w-full" placeholder="Masukkan nama instansi Anda"
+                formControlName="nama_instansi">
+
+            @if (Form.get('nama_instansi')?.touched && Form.get('nama_instansi')?.invalid) {
+            <span class="mt-0 rounded-md bg-red-200 text-red-600 font-semibold w-full text-xs p-2">
+                Nama Instansi Tidak Boleh Kosong
+            </span>
+            }
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col w-full gap-1 mb-4">
+            <p class="text-emerald-600 font-medium text-sm">
+                Email
+            </p>
+
+            <input type="email" pInputText class="p-inputtext-sm w-full" placeholder="Masukkan email Anda"
+                formControlName="email">
+
+            @if (Form.get('email')?.touched && Form.get('email')?.invalid) {
+            <span class="mt-0 rounded-md bg-red-200 text-red-600 font-semibold w-full text-xs p-2">
+                Format Email Anda Tidak Sesuai
+            </span>
+            }
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col w-full gap-1 mb-4">
+            <p class="text-emerald-600 font-medium text-sm">
+                Password
+            </p>
+
+            <p-password styleClass="w-full p-inputtext-sm p-0" [feedback]="false" [toggleMask]="true" appendTo="body"
+                formControlName="password" placeholder="Masukkan password Anda">
+            </p-password>
+
+            @if (Form.get('password')?.touched && Form.get('password')?.invalid) {
+            <span class="mt-0 rounded-md bg-red-200 text-red-600 font-semibold w-full text-xs p-2">
+                Password Tidak Boleh Kosong
+            </span>
+            }
+        </div>
+
+        <!-- Confirmation Password -->
+        <div class="{{ _showRegister ? 'flex' : 'hidden' }} flex-col w-full gap-1 mb-4">
+            <p class="text-emerald-600 font-medium text-sm">
+                Konfirmasi Password
+            </p>
+
+            <p-password styleClass="w-full p-inputtext-sm p-0" [feedback]="false" [toggleMask]="true" appendTo="body"
+                formControlName="confirm_password" placeholder="Masukkan kembali password Anda">
+            </p-password>
+
+            @if (Form.get('confirm_password')?.touched && Form.get('confirm_password')?.invalid) {
+            <span class="mt-0 rounded-md bg-red-200 text-red-600 font-semibold w-full text-xs p-2">
+                Password Tidak Boleh Kosong
+            </span>
+            }
+        </div>
+
+        <!-- Button -->
+        <div class="grid w-full mt-3 mb-2">
+            @if (_showRegister) {
+            <p-button severity="success" styleClass="p-button-sm w-full" label="Register"
+                (onClick)="handleRegister(Form.value)">
+            </p-button>
+            } @else {
+            <p-button severity="success" styleClass="p-button-sm w-full" label="Log In"
+                (onClick)="handleLogin(Form.value)">
+            </p-button>
+            }
+        </div>
+
+        <!-- Toggle -->
+        <div class="flex w-full justify-center">
+            @if (_showRegister) {
+            <p class="text-gray-500 text-sm text-center">
+                Sudah Punya Akun?
+                <span class="text-sky-500 font-semibold cursor-pointer" (click)="toggleRegisterForm()">
+                    Log In Disini
+                </span>
+            </p>
+            } @else {
+            <p class="text-gray-500 text-sm text-center">
+                Belum Punya Akun?
+                <span class="text-sky-500 font-semibold cursor-pointer" (click)="toggleRegisterForm()">
+                    Register Disini
+                </span>
+            </p>
+            }
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div
+        class="flex justify-center items-center w-full gap-2 mt-7 pt-7 border-t border-gray-200 border-solid border-b-0 border-x-0">
+        <p class="text-gray-500 text-xs text-center">
+            Supported by
+            <span class="text-emerald-500 font-medium">
+                Pandora Trans
+            </span>
+            - 2025 -
+            <span class="text-gray-500 text-xs">
+                v0.0.1
+            </span>
+        </p>
+    </div>
+</div>
