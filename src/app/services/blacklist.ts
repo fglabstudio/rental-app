@@ -6,7 +6,7 @@ import { HttpOperation } from './http-operation';
 @Injectable({
   providedIn: 'root'
 })
-export class Blacklist {
+export class BlacklistService {
   private api = inject(HttpOperation);
 
   getAll(): Observable<BlacklistEntry[]> {

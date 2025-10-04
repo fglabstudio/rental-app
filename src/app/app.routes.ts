@@ -14,5 +14,12 @@ export const routes: Routes = [
         data: {
             title: 'Home'
         }
+    },
+    {
+        path: 'blacklist',
+        loadComponent: async () => (await import('./pages/blacklist/blacklist')).Blacklist,
+        data: {
+            title: 'Customer Blacklist'
+        }
     }
 ];
