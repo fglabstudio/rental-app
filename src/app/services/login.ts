@@ -43,7 +43,7 @@ export class LoginService {
           }
 
           const [key, value] = user;
-          localStorage.setItem("_PTAPPUSER_", JSON.stringify(value));
+          localStorage.setItem("_PTAPPUSER_", JSON.stringify({ ...value, id: key }));
           return { ...value, id: key };
         })
       );
@@ -52,5 +52,28 @@ export class LoginService {
   updateLastLogin(id: string): Observable<Partial<User>> {
     const update = { last_login: new Date().toISOString() };
     return this.http.patch<Partial<User>>(`/user/${id}`, update);
+  }
+
+  updateUser(id: string, updated: Partial<User>): Observable<User> {
+    // encrypt password sebelum simpan
+    const payload: Partial<User> = {
+      ...updated,
+      ...(updated.password ? { password: this.crypto.encryptPassword(updated.password) } : {})
+    };
+
+    return this.http.patch<User>(`/user/${id}`, payload).pipe(
+      map(res => {
+        // update localStorage setelah berhasil
+        const raw = localStorage.getItem('_PTAPPUSER_');
+        if (raw) {
+          const current = JSON.parse(raw);
+          const newUser = { ...current, ...payload };
+          localStorage.setItem('_PTAPPUSER_', JSON.stringify(newUser));
+        }
+        this._messageService.clear();
+        this._messageService.add({ severity: 'success', summary: 'Berhasil', detail: 'Profil berhasil diperbarui' });
+        return res;
+      })
+    );
   }
 }

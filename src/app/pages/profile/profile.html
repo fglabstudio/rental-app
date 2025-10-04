@@ -1,0 +1,38 @@
+<app-layout>
+    <div class="p-0 space-y-4">
+        <h2 class="font-bold text-xl">Profil Saya</h2>
+
+        <form [formGroup]="form" class="space-y-3 mt-5">
+            <div class="flex flex-col gap-1">
+                <label class="text-sm font-medium">Email</label>
+                <input pInputText formControlName="email" class="p-inputtext-sm w-full" />
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label class="text-sm font-medium">Nama Lengkap</label>
+                <input pInputText formControlName="full_name" class="p-inputtext-sm w-full" />
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label class="text-sm font-medium">Nama Instansi</label>
+                <input pInputText formControlName="nama_instansi" class="p-inputtext-sm w-full" />
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label class="text-sm font-medium">Password</label>
+                <p-password formControlName="password" [feedback]="false" [toggleMask]="true"
+                    class="p-inputtext-sm w-full"></p-password>
+            </div>
+
+            <div class="flex flex-col gap-3 mt-5">
+                <button pButton type="button" label="Simpan" (click)="saveProfile()" class="w-full p-button-sm">
+                </button>
+
+                <button pButton type="button" severity="danger" label="Log Out" (click)="logout()"
+                    class="w-full p-button-sm">
+                </button>
+            </div>
+        </form>
+    </div>
+
+</app-layout>

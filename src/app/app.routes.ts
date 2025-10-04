@@ -28,5 +28,12 @@ export const routes: Routes = [
         data: {
             title: 'Unit'
         }
+    },
+    {
+        path: 'profile',
+        loadComponent: async () => (await import('./pages/profile/profile')).Profile,
+        data: {
+            title: 'Profile'
+        }
     }
 ];

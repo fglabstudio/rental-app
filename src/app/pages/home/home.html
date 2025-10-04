@@ -1,3 +1,21 @@
 <app-layout>
-    <p>home works!</p>
+    <div class="p-0 space-y-8">
+        <!-- Blacklist Section -->
+        <div>
+            <h2 class="font-bold text-lg mb-2">Blacklist Customer</h2>
+
+            <input pInputText type="text" placeholder="Cari nama customer..." class="p-inputtext-sm w-full mb-3"
+                [ngModel]="searchBlacklist()" (ngModelChange)="searchBlacklist.set($event)" />
+
+            <div class="flex flex-col w-full gap-3 pb-10" style="height: calc(100vh - 15rem); overflow-x: auto">
+                <div *ngFor="let entry of filteredBlacklist()"
+                    class="p-3 rounded-xl shadow bg-white border border-gray-300">
+                    <div class="font-semibold">{{ entry.nama_lengkap | titlecase}}</div>
+                    <div class="text-xs text-gray-600 mb-1">{{ entry.kabupaten_kota | titlecase }}</div>
+                    <div class="text-xs text-gray-500 mb-1">{{ entry.no_identitas }}</div>
+                    <div class="text-xs text-red-500">{{ entry.kronologi }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </app-layout>
