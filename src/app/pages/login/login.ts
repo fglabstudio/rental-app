@@ -63,22 +63,27 @@ export class Login implements OnDestroy {
   }
 
   handleLogin(data: any) {
-    this._loginService
-      .login(data.email, data.password)
-      .pipe(takeUntil(this.Destroy$))
-      .subscribe((result) => {
-        if (result.id) {
-          this._messageService.clear();
-          this._messageService.add({ severity: 'success', detail: 'Success', summary: 'Log in berhasil' });
-          setTimeout(() => {
-            this._router.navigateByUrl("/home");
-          }, 2500);
-        }
-      })
+    if (this.Form.valid) {
+      this._loginService
+        .login(data.email, data.password)
+        .pipe(takeUntil(this.Destroy$))
+        .subscribe((result) => {
+          if (result.id) {
+            this._messageService.clear();
+            this._messageService.add({ severity: 'success', detail: 'Success', summary: 'Log in berhasil' });
+            setTimeout(() => {
+              this._router.navigateByUrl("/home");
+            }, 2500);
+          }
+        })
+    } else {
+      this._messageService.clear();
+      this._messageService.add({ severity: 'error', detail: 'Oops', summary: 'Periksa data Anda' })
+    }
   }
 
   handleRegister(data: any) {
-    if (data.password === data.confirm_password) {
+    if (data.password === data.confirm_password && this.Form.valid) {
       const { confirm_password, ...payload } = data;
 
       this._loginService
