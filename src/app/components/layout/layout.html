@@ -1,9 +1,11 @@
-<div id="layout" class="grid items-start w-full min-h-[100dvh] overflow-hidden">
+<div id="layout" class="grid items-start w-full h-full min-h-[100dvh] overflow-hidden bg-gray-200">
     <app-navbar></app-navbar>
 
-    <div id="content" class="grid bg-gray-200 p-5 h-[calc(100dvh-9rem)]">
+    <div id="content" class="grid bg-gray-200 p-5 h-[calc(100dvh-10rem)]">
         <ng-content></ng-content>
     </div>
 
-    <app-footer></app-footer>
+    <div class="grid mt-auto">
+        <app-footer></app-footer>
+    </div>
 </div>

@@ -8,7 +8,7 @@
             <input pInputText placeholder="Cari nama customer..." class="w-full" [ngModel]="searchTerm()"
                 (ngModelChange)="searchTerm.set($event)" />
 
-            <div class="flex flex-col w-full gap-3 pb-10" style="height: calc(100vh - 15rem); overflow-x: auto">
+            <div class="flex flex-col w-full gap-3 pb-10" style="height: calc(100vh - 18rem); overflow-x: auto">
                 <div *ngFor="let entry of filteredEntries()" (click)="showDetail(entry)"
                     class="p-4 rounded-xl shadow bg-white border border-gray-200 cursor-pointer">
                     <div class="font-semibold text-lg">{{ entry.nama_lengkap | titlecase }}</div>
