@@ -21,5 +21,12 @@ export const routes: Routes = [
         data: {
             title: 'Customer Blacklist'
         }
+    },
+    {
+        path: 'unit',
+        loadComponent: async () => (await import('./pages/unit/unit')).Unit,
+        data: {
+            title: 'Unit'
+        }
     }
 ];

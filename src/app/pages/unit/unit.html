@@ -1,0 +1,99 @@
+<app-layout>
+    <div class="p-0">
+        <!-- LIST VIEW -->
+        <div *ngIf="mode() === 'list'" class="space-y-3">
+            <button pButton type="button" label="Tambah Unit" (click)="showAdd()" class="w-full p-button-sm"></button>
+
+            <!-- Input pencarian -->
+            <input pInputText type="text" placeholder="Cari nama pemilik atau plat nomor..."
+                class="p-inputtext-sm w-full" [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" />
+
+            <div *ngFor="let entry of filteredEntries()" (click)="showDetail(entry)"
+                class="p-4 rounded-xl shadow bg-white border cursor-pointer border-gray-300">
+                <div class="font-semibold text-lg">{{ entry.plat_nomor }}</div>
+                <div class="text-sm text-gray-600 mb-1">{{ entry.nama_pemilik }}</div>
+                <div class="text-xs text-gray-500">{{ entry.jenis_mobil }} - {{ entry.merk_mobil }}</div>
+            </div>
+        </div>
+
+        <!-- ADD VIEW -->
+        <div *ngIf="mode() === 'add'" class="space-y-4">
+            <h2 class="font-bold text-xl">Tambah Unit Anda</h2>
+
+            <form [formGroup]="form" class="space-y-3 mt-5">
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Nama Pemilik</label>
+                    <input pInputText formControlName="nama_pemilik" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Plat Nomor</label>
+                    <input pInputText formControlName="plat_nomor" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Jenis Mobil</label>
+                    <input pInputText formControlName="jenis_mobil" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Merk Mobil</label>
+                    <input pInputText formControlName="merk_mobil" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Keterangan</label>
+                    <textarea pInputTextarea formControlName="keterangan" rows="3"
+                        class="p-inputtext-sm w-full"></textarea>
+                </div>
+                <div class="flex gap-2">
+                    <button pButton type="button" label="Simpan" (click)="saveNew()" class="w-1/2 p-button-sm">
+                    </button>
+
+                    <button pButton type="button" label="Kembali" severity="secondary" (click)="back()"
+                        class="w-1/2 p-button-sm">
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- DETAIL VIEW -->
+        <div *ngIf="mode() === 'detail'" class="space-y-4">
+            <h2 class="font-bold text-xl">Detail Unit Anda</h2>
+
+            <form [formGroup]="form" class="space-y-3 mt-5">
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Nama Pemilik</label>
+                    <input pInputText formControlName="nama_pemilik" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Plat Nomor</label>
+                    <input pInputText formControlName="plat_nomor" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Jenis Mobil</label>
+                    <input pInputText formControlName="jenis_mobil" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Merk Mobil</label>
+                    <input pInputText formControlName="merk_mobil" class="p-inputtext-sm w-full" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium">Keterangan</label>
+                    <textarea pInputTextarea formControlName="keterangan" rows="3"
+                        class="p-inputtext-sm w-full"></textarea>
+                </div>
+                <div class="flex gap-2">
+                    <button pButton type="button" label="Update" (click)="confirmUpdate()" class="w-1/3 p-button-sm">
+                    </button>
+
+                    <button pButton type="button" label="Hapus" severity="danger" (click)="confirmDelete()"
+                        class="w-1/3 p-button-sm">
+                    </button>
+
+                    <button pButton type="button" label="Kembali" severity="secondary" (click)="back()"
+                        class="w-1/3 p-button-sm">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p-confirmDialog></p-confirmDialog>
+</app-layout>
