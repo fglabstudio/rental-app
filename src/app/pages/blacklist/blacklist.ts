@@ -79,6 +79,7 @@ export class Blacklist {
     this.form.patchValue(entry);
     this.mode.set('detail');
   }
+
   saveNew() {
     if (this.form.valid) {
       this.blacklistService.add(this.form.value as BlacklistEntry).subscribe(() => {

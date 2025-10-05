@@ -27,7 +27,7 @@ export class LoginService {
         map(res => {
           if (!res) {
             this._messageService.clear();
-            this._messageService.add({ severity: 'warn', detail: 'Oops', summary: 'User belum terdaftar' });
+            this._messageService.add({ severity: 'warn', summary: 'Oops', detail: 'User belum terdaftar' });
             throw new Error('User tidak terdaftar');
           };
 
@@ -38,7 +38,7 @@ export class LoginService {
 
           if (!user) {
             this._messageService.clear();
-            this._messageService.add({ severity: 'warn', detail: 'Oops', summary: 'Periksa email atau password Anda' });
+            this._messageService.add({ severity: 'warn', summary: 'Oops', detail: 'Periksa email atau password Anda' });
             throw new Error('Periksa email atau password Anda');
           }
 

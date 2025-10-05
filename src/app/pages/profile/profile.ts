@@ -79,7 +79,7 @@ export class Profile {
 
   logout() {
     this.messageService.clear();
-    this.messageService.add({ severity: 'success', detail: 'Success', summary: 'Log Out Berhasil' });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Log Out Berhasil' });
     setTimeout(() => {
       localStorage.clear();
       this.router.navigateByUrl("");

@@ -70,7 +70,7 @@ export class Login implements OnDestroy {
         .subscribe((result) => {
           if (result.id) {
             this._messageService.clear();
-            this._messageService.add({ severity: 'success', detail: 'Success', summary: 'Log in berhasil' });
+            this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Log in berhasil' });
             setTimeout(() => {
               this._router.navigateByUrl("/home");
             }, 2500);
@@ -78,7 +78,7 @@ export class Login implements OnDestroy {
         })
     } else {
       this._messageService.clear();
-      this._messageService.add({ severity: 'error', detail: 'Oops', summary: 'Periksa data Anda' })
+      this._messageService.add({ severity: 'error', summary: 'Oops', detail: 'Periksa data Anda' })
     }
   }
 
@@ -92,14 +92,14 @@ export class Login implements OnDestroy {
         .subscribe((result) => {
           if (result.name) {
             this._messageService.clear();
-            this._messageService.add({ severity: 'success', detail: 'Success', summary: 'Register berhasil' });
+            this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Register berhasil' });
             this.toggleRegisterForm();
           }
         });
 
     } else {
       this._messageService.clear();
-      this._messageService.add({ severity: 'error', detail: 'Oops', summary: 'Password tidak sesuai' })
+      this._messageService.add({ severity: 'error', summary: 'Oops', detail: 'Password tidak sesuai' })
     }
   }
 
