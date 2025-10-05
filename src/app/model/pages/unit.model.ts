@@ -5,6 +5,7 @@ export interface UnitEntry {
     jenis_mobil: string;
     merk_mobil: string;
     keterangan?: string;
+    stnk_path?: string;
     status_active: boolean;
     waktu_entry: string;
     user_entry: string;

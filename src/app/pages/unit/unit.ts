@@ -40,6 +40,10 @@ export class Unit {
   selectedEntry = signal<UnitEntry | null>(null);
   mode = signal<'list' | 'detail' | 'add'>('list');
 
+  // tambahan state untuk file upload
+  stnkFile: File | null = null;
+  stnkPreview: string | null = null;
+
   searchTerm = signal<string>('');
   filteredEntries = computed(() => {
     const term = this.searchTerm().toLowerCase();
@@ -66,19 +70,37 @@ export class Unit {
   }
 
   loadEntries(force = false) {
-    this.unitService.getAll().subscribe((data) => {
+    this.unitService.getAll(force).subscribe((data) => {
       this.entries.set(data);
     });
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) {
+      this.stnkFile = null;
+      this.stnkPreview = null;
+      return;
+    }
+    this.stnkFile = input.files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => (this.stnkPreview = reader.result as string);
+    reader.readAsDataURL(this.stnkFile);
+  }
+
   showAdd() {
     this.form.reset({ status_active: true, waktu_entry: new Date().toISOString() });
+    this.stnkFile = null;
+    this.stnkPreview = null;
     this.mode.set('add');
   }
 
   showDetail(entry: UnitEntry) {
     this.selectedEntry.set(entry);
     this.form.patchValue(entry);
+    this.stnkFile = null;
+    this.stnkPreview = entry.keterangan || null; // kalau URL disimpan di keterangan
     this.mode.set('detail');
   }
 
@@ -86,9 +108,10 @@ export class Unit {
     if (this.form.valid) {
       this.form.get('user_entry')?.setValue(this.loginService.getProfile().id!);
 
-      this.unitService.add(this.form.value as UnitEntry).subscribe(() => {
+      this.unitService.add(this.form.value as UnitEntry, this.stnkFile ?? undefined).subscribe(() => {
         this.loadEntries(true);
         this.mode.set('list');
+        this.resetFile();
       });
     }
   }
@@ -101,10 +124,12 @@ export class Unit {
         header: 'Konfirmasi Update',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.unitService.update(entry.id!, this.form.value as UnitEntry).subscribe(() => {
-            this.loadEntries(true);
-            this.mode.set('list');
-          });
+          this.unitService.update(entry.id!, this.form.value as UnitEntry, this.stnkFile ?? undefined, entry.stnk_path)
+            .subscribe(() => {
+              this.loadEntries(true);
+              this.mode.set('list');
+              this.resetFile();
+            });
         },
       });
     }
@@ -122,7 +147,11 @@ export class Unit {
         acceptButtonStyleClass: 'p-button-danger p-button-sm',
         rejectButtonStyleClass: 'p-button-secondary p-button-sm',
         accept: () => {
-          this.unitService.delete(entry.id!).subscribe(() => {
+          const oldFilePath = entry.keterangan
+            ? entry.keterangan.split('/object/public/unit-files/')[1]
+            : undefined;
+
+          this.unitService.delete(entry.id!, entry.stnk_path).subscribe(() => {
             this.loadEntries(true);
             this.mode.set('list');
           });
@@ -134,5 +163,11 @@ export class Unit {
   back() {
     this.mode.set('list');
     this.selectedEntry.set(null);
+    this.resetFile();
+  }
+
+  private resetFile() {
+    this.stnkFile = null;
+    this.stnkPreview = null;
   }
 }
