@@ -31,7 +31,6 @@ export class FileExport {
         Plat: rec.plat_nomor,
         Jenis: rec.jenis_mobil,
         Merk: rec.merk_mobil,
-        Keterangan: rec.keterangan,
         Waktu: rec.waktu_entry
           ? formatDate(new Date(rec.waktu_entry), 'dd-MM-yyyy HH:mm:ss', 'EN')
           : ''
