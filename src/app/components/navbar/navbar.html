@@ -7,4 +7,8 @@
     <p class="text-gray-700 text-lg font-medium mx-auto {{ Title != 'Home' ? 'pr-7' : '' }}">
         {{ Title }}
     </p>
+
+    @if (_userData.email == 'admin@gmail.com' && Title == 'Unit') {
+    <p-button severity="secondary" icon="pi pi-file-excel" (onClick)="export()"></p-button>
+    }
 </div>

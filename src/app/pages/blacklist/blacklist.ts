@@ -63,7 +63,7 @@ export class Blacklist {
     this.loadEntries();
   }
 
-  loadEntries() {
+  loadEntries(force = false) {
     this.blacklistService.getAll().subscribe((data) => {
       this.entries.set(data);
     });
@@ -82,7 +82,7 @@ export class Blacklist {
   saveNew() {
     if (this.form.valid) {
       this.blacklistService.add(this.form.value as BlacklistEntry).subscribe(() => {
-        this.loadEntries();
+        this.loadEntries(true);
         this.mode.set('list');
       });
     }
@@ -99,7 +99,7 @@ export class Blacklist {
           this.blacklistService
             .update(entry.id!, this.form.value as BlacklistEntry)
             .subscribe(() => {
-              this.loadEntries();
+              this.loadEntries(true);
               this.mode.set('list');
             });
         },
@@ -122,7 +122,7 @@ export class Blacklist {
           this.blacklistService
             .delete(entry.id!)
             .subscribe(() => {
-              this.loadEntries();
+              this.loadEntries(true);
               this.mode.set('list');
             });
         },

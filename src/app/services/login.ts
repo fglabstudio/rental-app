@@ -80,4 +80,15 @@ export class LoginService {
   getProfile() {
     return JSON.parse(localStorage.getItem("_PTAPPUSER_") as any) as User;
   }
+
+  getAllUser(forceRefresh = false): Observable<User[]> {
+    return this.http.get<{ [key: string]: User }>('user').pipe(
+      map(res =>
+        Object.entries(res || {}).map(([key, value]) => ({
+          ...value,
+          id: value.id || key
+        }))
+      )
+    );
+  }
 }

@@ -65,7 +65,7 @@ export class Unit {
     this.loadEntries();
   }
 
-  loadEntries() {
+  loadEntries(force = false) {
     this.unitService.getAll().subscribe((data) => {
       this.entries.set(data);
     });
@@ -87,7 +87,7 @@ export class Unit {
       this.form.get('user_entry')?.setValue(this.loginService.getProfile().id!);
 
       this.unitService.add(this.form.value as UnitEntry).subscribe(() => {
-        this.loadEntries();
+        this.loadEntries(true);
         this.mode.set('list');
       });
     }
@@ -102,7 +102,7 @@ export class Unit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           this.unitService.update(entry.id!, this.form.value as UnitEntry).subscribe(() => {
-            this.loadEntries();
+            this.loadEntries(true);
             this.mode.set('list');
           });
         },
@@ -123,7 +123,7 @@ export class Unit {
         rejectButtonStyleClass: 'p-button-secondary p-button-sm',
         accept: () => {
           this.unitService.delete(entry.id!).subscribe(() => {
-            this.loadEntries();
+            this.loadEntries(true);
             this.mode.set('list');
           });
         },
