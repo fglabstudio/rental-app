@@ -10,6 +10,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { UnitEntry } from '../../model/pages/unit.model';
 import { UnitService } from '../../services/unit';
 import { Layout } from "../../components/layout/layout";
+import { LoginService } from '../../services/login';
 
 @Component({
   selector: 'app-unit',
@@ -32,6 +33,7 @@ import { Layout } from "../../components/layout/layout";
 export class Unit {
   private fb = inject(FormBuilder);
   private unitService = inject(UnitService);
+  private loginService = inject(LoginService);
   private confirmationService = inject(ConfirmationService);
 
   entries = signal<UnitEntry[]>([]);
@@ -56,6 +58,7 @@ export class Unit {
     keterangan: [''],
     status_active: [true],
     waktu_entry: [''],
+    user_entry: ['']
   });
 
   constructor() {
@@ -81,6 +84,8 @@ export class Unit {
 
   saveNew() {
     if (this.form.valid) {
+      this.form.get('user_entry')?.setValue(this.loginService.getProfile().id!);
+
       this.unitService.add(this.form.value as UnitEntry).subscribe(() => {
         this.loadEntries();
         this.mode.set('list');

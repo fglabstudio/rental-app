@@ -7,4 +7,5 @@ export interface UnitEntry {
     keterangan?: string;
     status_active: boolean;
     waktu_entry: string;
+    user_entry: string;
 }

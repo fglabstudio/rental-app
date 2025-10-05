@@ -76,4 +76,8 @@ export class LoginService {
       })
     );
   }
+
+  getProfile() {
+    return JSON.parse(localStorage.getItem("_PTAPPUSER_") as any) as User;
+  }
 }
