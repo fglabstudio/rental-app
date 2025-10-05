@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -34,6 +34,7 @@ export class Unit {
   private fb = inject(FormBuilder);
   private unitService = inject(UnitService);
   private loginService = inject(LoginService);
+  private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
 
   entries = signal<UnitEntry[]>([]);
@@ -105,7 +106,7 @@ export class Unit {
   }
 
   saveNew() {
-    if (this.form.valid) {
+    if (this.form.valid && this.stnkFile) {
       this.form.get('user_entry')?.setValue(this.loginService.getProfile().id!);
 
       this.unitService.add(this.form.value as UnitEntry, this.stnkFile ?? undefined).subscribe(() => {
@@ -113,6 +114,9 @@ export class Unit {
         this.mode.set('list');
         this.resetFile();
       });
+    } else {
+      this.messageService.clear();
+      this.messageService.add({ severity: 'error', summary: 'Oops', detail: 'Periksa kembali data unit' })
     }
   }
 
